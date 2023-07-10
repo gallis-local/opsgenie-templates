@@ -1,0 +1,43 @@
+---------------------
+MESSAGE TEMPLATE
+---------------------
+
+📊 Azure Budget Alert: [ {{_payload.data.BudgetName}} ] 📊
+
+---------------------
+FILTER TEMPLATE
+---------------------
+
+Match All Conditions Below
+* Schema ID = AIP Budget Notification
+
+---------------------
+PRIORITY TEMPLATE
+---------------------
+
+P{{severity.extract(/Sev([1-5])/)}}
+
+---------------------
+NOTIFICATION TEMPLATE
+---------------------
+
+📊 Azure Budget Alert  📊
+
+🚀 Budget Details:
+- Subscription Name: {{_payload.data.SubscriptionName}}
+- Subscription ID: {{_payload.data.SubscriptionId}}
+- Department Name: {{_payload.data.DepartmentName}}
+- Account Name: {{_payload.data.AccountName}}
+- Resource Group: {{_payload.data.ResourceGroup}}
+- Spending Amount: {{_payload.data.SpendingAmount}} {{_payload.data.Unit}}
+- Budget Start Date: {{_payload.data.BudgetStartDate}}
+- Budget: {{_payload.data.Budget}} {{_payload.data.Unit}}
+- Budget Creator: {{_payload.data.BudgetCreator}}
+- Budget Name: {{_payload.data.BudgetName}}
+- Budget Type: {{_payload.data.BudgetType}}
+- Notification Threshold Amount: {{_payload.data.NotificationThresholdAmount}} {{_payload.data.Unit}}
+
+🔗 [View Budget Details on Azure Portal](https://portal.azure.com)
+
+🔍 Full Payload:
+{{_payload}}

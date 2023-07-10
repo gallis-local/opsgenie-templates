@@ -1,0 +1,54 @@
+---------------------
+MESSAGE TEMPLATE
+---------------------
+
+🚨 Azure Availability Test Alert: [  {{_payload.data.data.context.name}} ] 🚨
+
+---------------------
+FILTER TEMPLATE
+---------------------
+
+Match All Conditions Below
+* Schema ID = AzureMonitorMetricAlert
+
+---------------------
+PRIORITY TEMPLATE
+---------------------
+
+P{{severity.extract(/Sev([1-5])/)}}
+
+---------------------
+NOTIFICATION TEMPLATE
+---------------------
+
+🔔 Azure Availability Test Alert 🔔
+
+🚩 Alert Details:
+- Alert Name: {{_payload.data.data.context.name}}
+- Description: {{_payload.data.data.context.description}}
+- Condition Type: {{_payload.data.data.context.conditionType}}
+- Severity: {{_payload.data.data.context.severity}}
+- Window Size: {{_payload.data.data.context.condition.windowSize}}
+
+📅 Alert Timestamp: {{_payload.data.data.context.timestamp}}
+🔍 Alert ID: {{_payload.data.data.context.id}}
+
+🔧 Condition Details:
+- Metric Name: {{_payload.data.data.context.condition.allOf.get(0).substringBetween("metricName=",",")}}
+- Operator: {{_payload.data.data.context.condition.allOf.get(0).substringBetween("operator=",",")}}
+- Threshold: {{_payload.data.data.context.condition.allOf.get(0).substringBetween("threshold=",",")}}
+- Time Aggregation: {{_payload.data.data.context.condition.allOf.get(0).substringBetween("timeAggregation=",",")}}
+- Metric Value: {{_payload.data.data.context.condition.allOf.get(0).substringBetween("metricValue=",",")}}
+- Web Test Name: {{_payload.data.data.context.condition.allOf.get(0).substringBetween("webTestName=","}")}}
+
+🌐 Resource Information:
+- Resource ID: {{_payload.data.data.context.resourceId}}
+- Resource Type: {{_payload.data.data.context.resourceType}}
+- Resource Group: {{_payload.data.data.context.resourceGroupName}}
+- Resource Name: {{_payload.data.data.context.resourceName}}
+
+🔗 [View Alert Details on Azure Portal]({{_payload.data.data.context.portalLink}})
+
+----
+🔍 Full Payload:
+{{_payload}}

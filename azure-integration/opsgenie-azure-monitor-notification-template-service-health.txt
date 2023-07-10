@@ -1,0 +1,59 @@
+---------------------
+MESSAGE TEMPLATE
+---------------------
+
+🚨 Azure Service Health Alert: [ {{_payload.data.context.activityLog.properties.title}} ] - Status: [ {{_payload.data.context.activityLog.status}} ] 🚨
+
+---------------------
+FILTER TEMPLATE
+---------------------
+
+NOTE: confliciting consumption of schemaId
+
+Match All Conditions Below
+* Schema ID = Microsoft.Insights/activityLogs
+* ? contains Microsoft.ServiceHealth
+
+---------------------
+PRIORITY TEMPLATE
+---------------------
+
+P{{severity.extract(/Sev([1-5])/)}}
+
+---------------------
+NOTIFICATION TEMPLATE
+---------------------
+
+🔔 Service Health Alert Notification 🔔
+
+🚩 Alert Details:
+- Status: {{_payload.data.status}}
+- Event Source: {{_payload.data.context.activityLog.eventSource}}
+- Level: {{_payload.data.context.activityLog.level}}
+- Operation Name: {{_payload.data.context.activityLog.operationName}}
+- Operation ID: {{_payload.data.context.activityLog.operationId}}
+- Subscription ID: {{_payload.data.context.activityLog.subscriptionId}}
+- Correlation ID: {{_payload.data.context.activityLog.correlationId}}
+
+📅 Event Timestamp: {{_payload.data.context.activityLog.eventTimestamp}}
+🆔 Event Data ID: {{_payload.data.context.activityLog.eventDataId}}
+
+📢 Communication:
+{{_payload.data.context.activityLog.properties.communication}}
+
+📍 Incident Details:
+- Title: {{_payload.data.context.activityLog.properties.title}}
+- Service: {{_payload.data.context.activityLog.properties.service}}
+- Region: {{_payload.data.context.activityLog.properties.region}}
+- Incident Type: {{_payload.data.context.activityLog.properties.incidentType}}
+- Tracking ID: {{_payload.data.context.activityLog.properties.trackingId}}
+- Impact Start Time: {{_payload.data.context.activityLog.properties.impactStartTime}}
+- Impact Mitigation Time: {{_payload.data.context.activityLog.properties.impactMitigationTime}}
+- Impacted Services: {{_payload.data.context.activityLog.properties.impactedServices.get(0).substringBetween("ServiceName=", "}")}}
+- Impacted Regions: {{_payload.data.context.activityLog.properties.impactedServices.get(0).substringBetween("ImpactedRegions=[", "]")}}
+
+🔗 [View Alert Details on Azure Portal](https://portal.azure.com)
+
+----
+🔍 Full Payload:
+{{_payload}}

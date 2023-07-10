@@ -1,0 +1,53 @@
+---------------------
+MESSAGE TEMPLATE
+---------------------
+
+🚨 Azure Log Alert: [ {{_payload.data.AlertRuleName}} ] 🚨
+
+
+---------------------
+FILTER TEMPLATE
+---------------------
+
+NOTE: Last one in consumption of schemaId
+
+Match All Conditions Below
+* Schema ID = Microsoft.Insights/LogAlert
+
+---------------------
+PRIORITY TEMPLATE
+---------------------
+
+P{{severity.extract(/Sev([1-5])/)}}
+
+---------------------
+NOTIFICATION TEMPLATE
+---------------------
+
+🔔 Log Alert v1 Notification 🔔
+
+🚩 Alert Details:
+- Alert Rule Name: {{_payload.data.AlertRuleName}}
+- Description: {{_payload.data.Description}}
+- Severity: {{_payload.data.Severity}}
+- Alert Type: {{_payload.data.AlertType}}
+
+📅 Alert Timestamp: {{_payload.data.SearchIntervalStartTimeUtc}}
+🔍 Alert ID: {{_payload.data.WorkspaceId}}
+
+🔧 Condition Details:
+- Search Query: {{_payload.data.SearchQuery}}
+- Alert Threshold Operator: {{_payload.data.AlertThresholdOperator}}
+- Alert Threshold Value: {{_payload.data.AlertThresholdValue}}
+
+🌐 Resource Information:
+- Resource ID: {{_payload.data.ResourceId}}
+- Workspace ID: {{_payload.data.WorkspaceId}}
+
+🔗 [View Alert Details on Azure Portal]({{_payload.data.LinkToSearchResults}})
+
+🔗 [View Filtered Alert Results on Azure Portal]({{_payload.data.LinkToFilteredSearchResultsUI}})
+
+----
+🔍 Full Payload:
+{{_payload}}

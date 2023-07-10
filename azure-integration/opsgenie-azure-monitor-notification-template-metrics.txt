@@ -1,0 +1,97 @@
+---------------------
+MESSAGE TEMPLATE
+---------------------
+
+🚨 Azure Metric Alert: [  {{_payload.data.context.name}} ] - RG: [ {{resource_group_name}} ] 🚨
+
+---------------------
+FILTER TEMPLATE
+---------------------
+
+Match All Conditions Below
+* Schema ID = AzureMonitorMetricAlert
+* Status = Activated
+
+---------------------
+PRIORITY TEMPLATE
+---------------------
+
+P{{severity.extract(/Sev([1-5])/)}}
+
+---------------------
+NOTIFICATION TEMPLATE - In Use
+---------------------
+
+🔔 Azure Monitor Metric Alert Notification 🔔
+
+🚩 Alert Details:
+- Alert Name: {{_payload.data.context.name}}
+- Description: {{_payload.data.context.description}}
+- Condition Type: {{_payload.data.context.conditionType}}
+- Severity: {{_payload.data.context.severity}}
+- Window Size: {{_payload.data.context.condition.windowSize}}
+
+📅 Alert Timestamp: {{_payload.data.context.timestamp}}
+🔍 Alert ID: {{_payload.data.context.id}}
+
+🔧 Condition Details:
+- Metric Name: {{condition_metric_name}}
+- Metric Namespace: {{condition_metric_namespace}}
+- Operator: {{condition_operator}}
+- Threshold: {{condition_threshold}}
+- Time Aggregation: {{condition_time_aggregation}}
+- Metric Value: {{condition_metric_value}}
+
+🌐 Resource Information:
+- Resource ID: {{_payload.data.context.resourceId}}
+- Resource Type: {{_payload.data.context.resourceType}}
+- Resource Group: {{_payload.data.context.resourceGroupName}}
+- Resource Name: {{_payload.data.context.resourceName}}
+
+🔗 [View Alert Details on Azure Portal]({{_payload.data.context.portalLink}})
+
+----
+🔍 Full Payload:
+{{_payload.data}}
+
+---------------
+TEST 2
+---------------
+
+🔔 Azure Monitor Metric Alert Notification 🔔
+
+🚩 Alert Details:
+- Alert Name: {{_payload.data.context.name}}
+- Description: {{_payload.data.context.description}}
+- Condition Type: {{_payload.data.context.conditionType}}
+- Severity: {{_payload.data.context.severity}}
+- Window Size: {{_payload.data.context.condition.windowSize}}
+
+📅 Alert Timestamp: {{_payload.data.context.timestamp}}
+🔍 Alert ID: {{_payload.data.context.id}}
+
+🔧 Condition Details:
+- Monitor Condition: {{_payload.data.context.monitorCondition}}
+- Monitor Service: {{_payload.data.context.monitoringService}}
+- Condition Time Aggregation: {{_payload.data.context.condition_time_aggregation}}
+- Condition Window Size: {{_payload.data.context.condition_window_size}}
+- Condition Type: {{_payload.data.context.condition_type}}
+- Condition Metric Name: {{_payload.data.context.condition_metric_name}}
+- Condition Metric Namespace: {{_payload.data.context.condition_metric_namespace}}
+- Condition Metric Unit: {{_payload.data.context.condition_metric_unit}}
+- Condition Metric Value: {{_payload.data.context.condition_metric_value}}
+- Condition Threshold: {{_payload.data.context.condition_threshold}}
+- Condition Operator: {{condition_operator}}
+- Condition: {{_payload.data.context.condition_metric_value}} {{_payload.data.context.condition_metric_unit}} {{_payload.data.context.condition_operator}} {{_payload.data.context.condition_threshold}} {{_payload.data.context.condition_metric_unit}}
+
+🌐 Resource Information:
+- Resource ID: {{_payload.data.context.resourceId}}
+- Resource Type: {{_payload.data.context.resourceType}}
+- Resource Group: {{_payload.data.context.resourceGroupName}}
+- Resource Name: {{_payload.data.context.resourceName}}
+
+🔗 [View Alert Details on Azure Portal]({{_payload.data.context.portalLink}})
+
+----
+🔍 Full Payload:
+{{_payload}}

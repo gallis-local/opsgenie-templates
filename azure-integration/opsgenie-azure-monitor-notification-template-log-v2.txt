@@ -1,0 +1,58 @@
+---------------------
+MESSAGE TEMPLATE
+---------------------
+
+🚨 Azure Log Alert: [ {{_payload.data.data.essentials.alertRule}} ] 🚨
+
+
+---------------------
+FILTER TEMPLATE
+---------------------
+
+NOTE: confliciting consumption of schemaId
+
+Match All Conditions Below
+* Schema ID = Microsoft.Insights/LogAlert
+
+---------------------
+PRIORITY TEMPLATE
+---------------------
+
+P{{severity.extract(/Sev([1-5])/)}}
+
+---------------------
+NOTIFICATION TEMPLATE - 
+---------------------
+
+🔔 Logs Alert v2 Notification 🔔
+
+🚩 Alert Details:
+- Alert Rule Name: {{_payload.data.data.essentials.alertRule}}
+- Description: {{_payload.data.data.essentials.description}}
+- Severity: {{_payload.data.data.essentials.severity}}
+- Monitor Condition: {{_payload.data.data.essentials.monitorCondition}}
+- Monitoring Service: {{_payload.data.data.essentials.monitoringService}}
+
+📅 Alert Timestamp: {{_payload.data.data.essentials.firedDateTime}}
+🔍 Alert ID: {{_payload.data.data.essentials.alertId}}
+
+🔧 Condition Details:
+- Condition Type: {{_payload.data.data.alertContext.conditionType}}
+- Window Size: {{_payload.data.data.alertContext.condition.windowSize}} 
+- Search Query:  {{_payload.data.data.alertContext.condition.allOf.get(0).substringBetween("searchQuery=", ",")}} 
+- Operator:  {{_payload.data.data.alertContext.condition.allOf.get(0).substringBetween("operator=", ",")}} 
+- Threshold: {{_payload.data.data.alertContext.condition.allOf.get(0).substringBetween("threshold=", ",")}} 
+- Time Aggregation: {{_payload.data.data.alertContext.condition.allOf.get(0).substringBetween("timeAggregation=", ",")}} 
+- Metric Value:  {{_payload.data.data.alertContext.condition.allOf.get(0).substringBetween("metricValue=", ",")}} 
+
+🌐 Resource Information:
+- Resource IDs: {{_payload.data.data.essentials.alertTargetIDs}}
+- Configuration Items: {{_payload.data.data.essentials.configurationItems}}
+- Origin Alert ID: {{_payload.data.data.essentials.originAlertId}}
+
+🔗 [View Alert Details on Azure Portal]
+{{portal_link}}
+
+----
+🔍 Full Payload:
+{{_payload}}

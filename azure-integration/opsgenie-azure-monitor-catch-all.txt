@@ -1,0 +1,83 @@
+---------------------
+MESSAGE TEMPLATE
+---------------------
+
+[Azure]  
+{{name}} - {{resource_group_name}} -  {{schemaId}}
+
+
+---------------------
+FILTER TEMPLATE
+---------------------
+
+Match All Conditions Below
+* Catch ALL
+
+---------------------
+PRIORITY TEMPLATE
+---------------------
+
+P{{severity.extract(/Sev([1-5])/)}}
+
+---------------------
+NOTIFICATION TEMPLATE
+---------------------
+
+Link: {{portal_link}}
+
+Status: {{status}}
+Severity: {{severity}}
+Name: {{name}}
+ID: {{id}}
+Timestamp: {{timestamp}}
+Rule: {{alertRule}}
+Fired: {{firedDateTime}}
+Monitor Condition: {{monitorCondition}}
+Monitor Service:  {{monitoringService}}
+Condition Time Aggregation: {{condition_time_aggregation}}
+Condition Window Size: {{condition_window_size}}
+Condition Type: {{condition_type}}
+Condition Metric Name: {{condition_metric_name}}
+Condition Metric Namespace: {{condition_metric_namespace}}
+Condition Metric Unit: {{condition_metric_unit}}
+Condition Metric Value: {{condition_metric_value}} 
+Condition Threshold: {{condition_threshold}} 
+Condition Operator: {{condition_operator}} 
+Condition: 
+{{condition_metric_value}} {{condition_metric_unit}} {{condition_operator}} {{condition_threshold}} {{condition_metric_unit}} 
+
+Subscription: {{subscription_id}}
+Resource Group: {{resource_group_name}}
+Region: {{resource_region}}
+Resource Name : {{resource_name}}
+Resource ID: {{resource_id}}
+Resource Type: {{resource_type}}
+Target: {{alertTargetIDs}}
+Dimensions: {{dimensions}}
+Dimensions List:  {{dimensionList}}
+
+Alert Context Version: {{alertContextVersion}}
+Version: {{version}}
+Essentials Version: {{essentialsVersion}}
+Schema ID: {{schemaId}}
+Signal Type: {{signalType}}
+Alert Target ID: {{alertTargetIDs}}
+Origin Alert ID: {{originAlertId}}
+
+Properties: {{properties}}
+
+
+Description: 
+{{description}}
+
+----
+SERVICE HEALTH-BASED ALERTS
+Health Status: {{_payload.data.context.activityLog.properties.currentHealthStatus}}
+Previous Health Status: {{_payload.data.activityLog.context.properties.previousHealthStatus}}
+Type: {{_payload.data.context.activityLog.properties.type}}
+Cause: {{_payload.data.context.activityLog.properties.cause}}
+
+
+---
+FULL PAYLOAD:
+{{_payload}}

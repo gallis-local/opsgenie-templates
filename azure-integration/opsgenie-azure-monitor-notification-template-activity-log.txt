@@ -1,0 +1,62 @@
+---------------------
+MESSAGE TEMPLATE
+---------------------
+
+🚨 Alert: [ {{_payload.data.context.activityLog.operationName}} ] - RG: [ {{_payload.data.context.activityLog.resourceGroupName}} ] - Status: [ {{_payload.data.context.activityLog.status}} ] 🚨
+
+---------------------
+FILTER TEMPLATE
+---------------------
+
+Match All Conditions Below
+* Schema ID = Microsoft.Insights/activityLogs
+* Status = Activated
+
+---------------------
+PRIORITY TEMPLATE
+---------------------
+
+P{{severity.extract(/Sev([1-5])/)}}
+
+---------------------
+NOTIFICATION TEMPLATE
+---------------------
+
+🔔 Azure Activity Log Alert Notification 🔔
+
+🚩 Alert Details:
+- Status: {{_payload.data.context.activityLog.status}}
+- Alert Rule: {{_payload.data.context.activityLog.operationName}}
+- Caller: {{_payload.data.context.activityLog.caller}}
+- Resource Group: {{_payload.data.context.activityLog.resourceGroupName}}
+
+
+📅 Alert Timestamp: {{_payload.data.context.activityLog.eventTimestamp}}
+🔎 Event Source: {{_payload.data.context.activityLog.eventSource}}
+🔧 Level: {{_payload.data.context.activityLog.level}}
+📋 Description: {{_payload.data.context.activityLog.description}}
+
+🔍 Activity Log Details:
+- Operation ID: {{_payload.data.context.activityLog.operationId}}
+- Correlation ID: {{_payload.data.context.activityLog.correlationId}}
+- Caller: {{_payload.data.context.activityLog.caller}}
+- Subscription ID: {{_payload.data.context.activityLog.subscriptionId}}
+- Resource ID: {{_payload.data.context.activityLog.resourceId}}
+- Resource Type: {{_payload.data.context.activityLog.resourceType}}
+- Resource Group: {{_payload.data.context.activityLog.resourceGroupName}}
+- Status: {{_payload.data.context.activityLog.status}}
+
+📝 Custom Properties:
+{{_payload.data.properties}}
+
+🌐 Resource Information:
+- Resource ID: {{_payload.data.context.activityLog.resourceId}}
+- Resource Type: {{_payload.data.context.activityLog.resourceType}}
+- Resource Group: {{_payload.data.context.activityLog.resourceGroupName}}
+- Resource Provider: {{_payload.data.context.activityLog.resourceProviderName}}
+
+🔗 [View Alert Details on Azure Portal]({{portal_link}})
+
+----
+🔍 Full Payload:
+{{_payload.data}}
