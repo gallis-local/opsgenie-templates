@@ -1,0 +1,61 @@
+---------------------
+MESSAGE TEMPLATE
+---------------------
+
+🚨 Azure Smart Alert: [ {{_payload.data.essentials.alertRule}} ] 🚨
+
+---------------------
+FILTER TEMPLATE
+---------------------
+
+Match All Conditions Below
+* Schema ID = azureMonitorCommonAlertSchema
+* signalType = Log
+* monitoringService = SmartDetector
+
+---------------------
+PRIORITY TEMPLATE
+---------------------
+
+P{{severity.extract(/Sev([1-5])/)}}
+
+---------------------
+NOTIFICATION TEMPLATE
+---------------------
+
+🔔 Azure Smart Alert 🔔
+
+🚩 Alert Details:
+- Alert ID: {{_payload.data.essentials.alertId}}
+- Alert Rule: {{_payload.data.essentials.alertRule}}
+- Description: {{_payload.data.essentials.description}}
+- Severity: {{_payload.data.essentials.severity}}
+- Fired DateTime: {{_payload.data.essentials.firedDateTime}}
+
+🌟 Alert Context:
+- Detection Summary: {{_payload.data.alertContext.DetectionSummary}}
+- Formatted Occurrence Time: {{_payload.data.alertContext.FormattedOccurrenceTime}}
+- Detected Value: {{_payload.data.alertContext.DetectedValue}}
+- Normal Value: {{_payload.data.alertContext.NormalValue}}
+- Presentation Insight Event Request: {{_payload.data.alertContext.PresentationInsightEventRequest}}
+- Smart Detector ID: {{_payload.data.alertContext.SmartDetectorId}}
+- Smart Detector Name: {{_payload.data.alertContext.SmartDetectorName}}
+- Analysis Timestamp: {{_payload.data.alertContext.AnalysisTimestamp}}
+
+📅 Alert Timestamp: {{_payload.data.essentials.firedDateTime}}
+
+🌐 Resource Information:
+- Signal Type: {{_payload.data.essentials.signalType}}
+- Monitor Condition: {{_payload.data.essentials.monitorCondition}}
+- Monitoring Service: {{_payload.data.essentials.monitoringService}}
+- Alert Target IDs: {{_payload.data.essentials.alertTargetIDs}}
+- Configuration Items: {{_payload.data.essentials.configurationItems}}
+- Origin Alert ID: {{_payload.data.essentials.originAlertId}}
+
+
+🔗 [View Alert Details on Azure Portal]({{_payload.data.essentials.portalLink}})
+
+----
+🔍 Full Payload:
+{{_payload.data}}
+

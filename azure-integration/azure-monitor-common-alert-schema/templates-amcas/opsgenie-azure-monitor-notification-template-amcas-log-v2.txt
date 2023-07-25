@@ -1,0 +1,54 @@
+---------------------
+MESSAGE TEMPLATE
+---------------------
+
+🚨 Azure Log Alert: [ {{_payload.data.essentials.alertRule}} ] 🚨
+
+---------------------
+FILTER TEMPLATE
+---------------------
+
+Match All Conditions Below
+* Schema ID = azureMonitorCommonAlertSchema
+* signalType = Log
+* Monitoring Service = Log Alerts v2
+
+---------------------
+PRIORITY TEMPLATE
+---------------------
+
+P{{severity.extract(/Sev([1-5])/)}}
+
+---------------------
+NOTIFICATION TEMPLATE
+---------------------
+
+🔔 Azure Log Alert v2 🔔
+
+🚩 Alert Details:
+- Alert Rule: {{_payload.data.essentials.alertRule}}
+- Description: {{_payload.data.essentials.description}}
+- Severity: {{_payload.data.essentials.severity}}
+- Fired DateTime: {{_payload.data.essentials.firedDateTime}}
+
+🌟 Alert Context:
+- Search Query: {{_payload.data.alertContext.condition.allOf.get(0).substringBetween("searchQuery=", ",")}}
+- Operator: {{_payload.data.alertContext.condition.allOf.get(0).substringBetween("operator=", ",")}}
+- Threshold: {{_payload.data.alertContext.condition.allOf.get(0).substringBetween("threshold=", ",")}}
+- Time Aggregation: {{_payload.data.alertContext.condition.allOf.get(0).substringBetween("timeAggregation=", ",")}}
+- Metric Value: {{_payload.data.alertContext.condition.allOf.get(0).substringBetween("metricValue=", ",")}}
+- Link to Search Results UI: {{_payload.data.alertContext.condition.allOf.get(0).substringBetween("linkToSearchResultsUI=", ",")}}
+- Link to Filtered Search Results UI: {{_payload.data.alertContext.condition.allOf.get(0).substringBetween("linkToFilteredSearchResultsUI=", ",")}}
+
+🌐 Resource Information:
+- Signal Type: {{_payload.data.essentials.signalType}}
+- Monitor Condition: {{_payload.data.essentials.monitorCondition}}
+- Monitoring Service: {{_payload.data.essentials.monitoringService}}
+- Alert Target IDs: {{_payload.data.essentials.alertTargetIDs}}
+- Origin Alert ID: {{_payload.data.essentials.originAlertId}}
+
+🔗 [View Alert Details on Azure Portal](https://portal.azure.com/#view/Microsoft_Azure_Monitoring/AzureMonitoringBrowseBlade/~/alertsV2)
+
+----
+🔍 Full Payload:
+{{_payload.data}}

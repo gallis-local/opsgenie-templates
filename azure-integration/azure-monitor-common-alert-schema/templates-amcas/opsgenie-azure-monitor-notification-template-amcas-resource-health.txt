@@ -1,0 +1,66 @@
+---------------------
+MESSAGE TEMPLATE
+---------------------
+
+🚨 Azure Resource Health Alert: [ {{_payload.data.essentials.alertRule}} ] 🚨
+
+---------------------
+FILTER TEMPLATE
+---------------------
+
+Match All Conditions Below
+* Schema ID = azureMonitorCommonAlertSchema
+* signalType = Activity Log
+* monitoringService = Resource Health
+
+---------------------
+PRIORITY TEMPLATE
+---------------------
+
+P{{severity.extract(/Sev([1-5])/)}}
+
+---------------------
+NOTIFICATION TEMPLATE
+---------------------
+
+🔔 Azure Resource Health Alert 🔔
+
+🚩 Alert Details:
+- Alert Rule: {{_payload.data.essentials.alertRule}}
+- Description: {{_payload.data.essentials.description}}
+- Severity: {{_payload.data.essentials.severity}}
+- Fired DateTime: {{_payload.data.essentials.firedDateTime}}
+
+📅 Alert Timestamp: {{_payload.data.alertContext.submissionTimestamp}}
+
+📜 Alert Properties:
+- Title: {{_payload.data.alertContext.properties.title}}
+- Current Health Status: {{_payload.data.alertContext.properties.currentHealthStatus}}
+- Previous Health Status: {{_payload.data.alertContext.properties.previousHealthStatus}}
+- Type: {{_payload.data.alertContext.properties.type}}
+- Cause: {{_payload.data.alertContext.properties.cause}}
+- Configuration Items: {{_payload.data.essentials.configurationItems}}
+
+🌟 Alert Context:
+- Channels: {{_payload.data.alertContext.channels}}
+- Correlation ID: {{_payload.data.alertContext.correlationId}}
+- Event Source: {{_payload.data.alertContext.eventSource}}
+- Event Timestamp: {{_payload.data.alertContext.eventTimestamp}}
+- Event Data ID: {{_payload.data.alertContext.eventDataId}}
+- Level: {{_payload.data.alertContext.level}}
+- Operation Name: {{_payload.data.alertContext.operationName}}
+- Operation ID: {{_payload.data.alertContext.operationId}}
+
+🌐 Resource Information:
+- Signal Type: {{_payload.data.essentials.signalType}}
+- Monitor Condition: {{_payload.data.essentials.monitorCondition}}
+- Monitoring Service: {{_payload.data.essentials.monitoringService}}
+- Alert Target IDs: {{_payload.data.essentials.alertTargetIDs}}
+- Origin Alert ID: {{_payload.data.essentials.originAlertId}}
+
+
+🔗 [View Alert Details on Azure Portal](https://portal.azure.com/#view/Microsoft_Azure_Monitoring/AzureMonitoringBrowseBlade/~/alertsV2)
+
+----
+🔍 Full Payload:
+{{_payload.data}}

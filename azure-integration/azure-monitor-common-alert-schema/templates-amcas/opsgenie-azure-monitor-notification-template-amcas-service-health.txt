@@ -1,0 +1,76 @@
+---------------------
+MESSAGE TEMPLATE
+---------------------
+
+🚨 Azure Service Health Alert: [ {{_payload.data.essentials.alertRule}} ] 🚨
+
+---------------------
+FILTER TEMPLATE
+---------------------
+
+Match All Conditions Below
+* Schema ID = azureMonitorCommonAlertSchema
+* signalType = Activity Log
+* monitoringService = ServiceHealth
+
+---------------------
+PRIORITY TEMPLATE
+---------------------
+
+P{{severity.extract(/Sev([1-5])/)}}
+
+---------------------
+NOTIFICATION TEMPLATE
+---------------------
+
+🔔 Azure Service Health Alert 🔔
+
+🚩 Alert Details:
+- Alert Rule: {{_payload.data.essentials.alertRule}}
+- Description: {{_payload.data.essentials.description}}
+- Severity: {{_payload.data.essentials.severity}}
+- Fired DateTime: {{_payload.data.essentials.firedDateTime}}
+
+📜 Alert Properties:
+- Title: {{_payload.data.alertContext.properties.title}}
+- Service: {{_payload.data.alertContext.properties.service}}
+- Region: {{_payload.data.alertContext.properties.region}}
+- Incident Type: {{_payload.data.alertContext.properties.incidentType}}
+- Tracking ID: {{_payload.data.alertContext.properties.trackingId}}
+- Communication: {{_payload.data.alertContext.properties.communication}}
+
+🔔 Impact:
+- Stage: {{_payload.data.alertContext.properties.stage}}
+- Impact Start Time: {{_payload.data.alertContext.properties.impactStartTime}}
+- Impact Mitigation Time: {{_payload.data.alertContext.properties.impactMitigationTime}}
+- Impacted Services: {{_payload.data.alertContext.properties.impactedServices}}
+- Impacted Services Table Rows: {{_payload.data.alertContext.properties.impactedServicesTableRows}}
+- Communication ID: {{_payload.data.alertContext.properties.communicationId}}
+- isHIR: {{_payload.data.alertContext.properties.isHIR}}
+- IsSynthetic: {{_payload.data.alertContext.properties.IsSynthetic}}
+- Impact Type: {{_payload.data.alertContext.properties.impactType}}
+- Version: {{_payload.data.alertContext.properties.version}}
+
+🌟 Alert Context:
+- Channels: {{_payload.data.alertContext.channels}}
+- Correlation ID: {{_payload.data.alertContext.correlationId}}
+- Event Source: {{_payload.data.alertContext.eventSource}}
+- Event Timestamp: {{_payload.data.alertContext.eventTimestamp}}
+- Event Data ID: {{_payload.data.alertContext.eventDataId}}
+- Level: {{_payload.data.alertContext.level}}
+- Operation Name: {{_payload.data.alertContext.operationName}}
+- Operation ID: {{_payload.data.alertContext.operationId}}
+
+🌐 Resource Information:
+- Signal Type: {{_payload.data.essentials.signalType}}
+- Monitor Condition: {{_payload.data.essentials.monitorCondition}}
+- Monitoring Service: {{_payload.data.essentials.monitoringService}}
+- Alert Target IDs: {{_payload.data.essentials.alertTargetIDs}}
+- Origin Alert ID: {{_payload.data.essentials.originAlertId}}
+
+
+🔗 [View Alert Details on Azure Portal](https://portal.azure.com/#view/Microsoft_Azure_Monitoring/AzureMonitoringBrowseBlade/~/alertsV2)
+
+----
+🔍 Full Payload:
+{{_payload.data}}

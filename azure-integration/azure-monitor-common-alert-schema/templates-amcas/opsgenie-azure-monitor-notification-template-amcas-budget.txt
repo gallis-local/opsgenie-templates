@@ -1,0 +1,51 @@
+---------------------
+MESSAGE TEMPLATE
+---------------------
+
+🚨 Azure Budget Alert 🚨
+
+---------------------
+FILTER TEMPLATE
+---------------------
+
+Match All Conditions Below
+* Schema ID = azureMonitorCommonAlertSchema
+* signalType = Activity Log
+* Monitoring Service = CostAlerts
+
+---------------------
+PRIORITY TEMPLATE
+---------------------
+
+P{{severity.extract(/Sev([1-5])/)}}
+
+---------------------
+NOTIFICATION TEMPLATE
+---------------------
+
+🔔 Azure Budget Alert 🔔
+
+🚩 Alert Details:
+- Monitoring Service: {{_payload.data.essentials.monitoringService}}
+- Fired DateTime: {{_payload.data.essentials.firedDateTime}}
+- Description: {{_payload.data.essentials.description}}
+
+🌟 Alert Context:
+- Alert Category: {{_payload.data.alertContext.AlertCategory}}
+- Scope: {{_payload.data.alertContext.AlertData.Scope}}
+- Budget Name: {{_payload.data.alertContext.AlertData.BudgetName}}
+- Budget Creator: {{_payload.data.alertContext.AlertData.BudgetCreator}}
+- Budget ID: {{_payload.data.alertContext.AlertData.BudgetId}}
+- Budget Type: {{_payload.data.alertContext.AlertData.BudgetType}}
+- Budget Threshold: {{_payload.data.alertContext.AlertData.BudgetThreshold}}
+- Threshold Type: {{_payload.data.alertContext.AlertData.ThresholdType}}
+- Budget Start Date: {{_payload.data.alertContext.AlertData.BudgetStartDate}}
+- Notification Threshold Amount: {{_payload.data.alertContext.AlertData.NotificationThresholdAmount}}
+- Spent Amount: {{_payload.data.alertContext.AlertData.SpentAmount}}
+- Notification Threshold Amount: {{_payload.data.alertContext.AlertData.NotificationThresholdAmount}}
+
+🔗 [View Alert Details on Azure Portal](https://portal.azure.com/#view/Microsoft_Azure_Monitoring/AzureMonitoringBrowseBlade/~/alertsV2)
+
+----
+🔍 Full Payload:
+{{_payload.data}}

@@ -1,0 +1,65 @@
+---------------------
+MESSAGE TEMPLATE
+---------------------
+
+🚨 Azure Log Alert: [ {{_payload.data.essentials.alertRule}} ] 🚨
+
+---------------------
+FILTER TEMPLATE
+---------------------
+
+Match All Conditions Below
+* Schema ID = azureMonitorCommonAlertSchema
+* signalType = Log
+* Monitoring Service = Log Analytics
+
+---------------------
+PRIORITY TEMPLATE
+---------------------
+
+P{{severity.extract(/Sev([1-5])/)}}
+
+---------------------
+NOTIFICATION TEMPLATE
+---------------------
+
+🔔 Azure Log Alert 🔔
+
+🚩 Alert Details:
+- Alert Rule: {{_payload.data.essentials.alertRule}}
+- Description: {{_payload.data.essentials.description}}
+- Severity: {{_payload.data.essentials.severity}}
+- Fired DateTime: {{_payload.data.essentials.firedDateTime}}
+
+📜 Alert Properties:
+- Threshold: {{_payload.data.alertContext.Threshold}}
+- Operator: {{_payload.data.alertContext.Operator}}
+- Included Search Results: {{_payload.data.alertContext.IncludedSearchResults}}
+
+🌟 Alert Context:
+- Search Query: {{_payload.data.alertContext.SearchQuery}}
+- Search Interval Start Time: {{_payload.data.alertContext.SearchIntervalStartTimeUtc}}
+- Search Interval End Time: {{_payload.data.alertContext.SearchIntervalEndtimeUtc}}
+- Result Count: {{_payload.data.alertContext.ResultCount}}
+- Link to Search Results: {{_payload.data.alertContext.LinkToSearchResults}}
+- Link to Filtered Search Results UI: {{_payload.data.alertContext.LinkToFilteredSearchResultsUI}}
+- Severity Description: {{_payload.data.alertContext.SeverityDescription}}
+- Workspace ID: {{_payload.data.alertContext.WorkspaceId}}
+- Search Interval Duration (Min): {{_payload.data.alertContext.SearchIntervalDurationMin}}
+- Alert Type: {{_payload.data.alertContext.AlertType}}
+- Include Search Results: {{_payload.data.alertContext.IncludeSearchResults}}
+- Dimensions: {{_payload.data.alertContext.Dimensions}}
+- Search Interval in Minutes: {{_payload.data.alertContext.SearchIntervalInMinutes}}
+
+🌐 Resource Information:
+- Signal Type: {{_payload.data.essentials.signalType}}
+- Monitor Condition: {{_payload.data.essentials.monitorCondition}}
+- Monitoring Service: {{_payload.data.essentials.monitoringService}}
+- Alert Target IDs: {{_payload.data.essentials.alertTargetIDs}}
+- Origin Alert ID: {{_payload.data.essentials.originAlertId}}
+
+🔗 [View Alert Details on Azure Portal](https://portal.azure.com/#view/Microsoft_Azure_Monitoring/AzureMonitoringBrowseBlade/~/alertsV2)
+
+----
+🔍 Full Payload:
+{{_payload.data}}
