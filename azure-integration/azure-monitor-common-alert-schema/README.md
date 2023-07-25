@@ -1,4 +1,4 @@
-# V1 Template Usage
+# Azure Common Alert Schema Template
 
 
 ## How to use - Automation
@@ -8,8 +8,6 @@ Terraform templates to deploy the OpsGenie Azure Monitor Integration are availab
 ## How to use - Manual
 
 Apply to OpsGenie Azure Monitor Integration. Ensure that the filters are configured to ensure the webhook alerts are rendered using the proper template. Follow the configured Filter settings in each template.
-
-NOTE: Activity Log based alerts are pending proper filtering based on OpsGenie Variables. The current templates will not fire alerts for Activity Log based alerts using the proper template till resolved.
 
 ## Templates
 
@@ -27,17 +25,15 @@ The following templates are available:
 
 ## Filter Order
 
-Needs fix - denotes OpsGenie Filter is not working as expected for inbound alert metadata
-
 * Create Alert - AIP Budget
-* Create Alert - Service Health (needs fix)
-* Create Alert - Resource Health (needs fix)
+* Create Alert - Service Health
+* Create Alert - Resource Health 
 * Create Alert - ActivityLog 
 * Create Alert - MetricAlert 
-* Create Alert - Availability Test 
 * Create Alert - AMCAS Metric
 * Create Alert - AMCAS Activity Log
 * Create Alert - AMCAS
+* Create Alert - Catch-All
 
 ## Documentation
 
