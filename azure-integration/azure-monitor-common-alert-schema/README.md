@@ -1,5 +1,6 @@
 # Azure Common Alert Schema Template
 
+Support Autoclosing based on Azure Alert closure and Catch-All
 
 ## How to use - Automation
 
