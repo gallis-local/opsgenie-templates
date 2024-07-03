@@ -7,8 +7,8 @@ resource "opsgenie_integration_action" "azure_monitor_template" {
   create {
     name = "Create Alert - AMCAS Budget"
     tags = ["azure", "budget"]
-    user = "Azure"
     alias         = "{{id}}"
+    user = "Azure"
     source        = "Azure"
     custom_priority      = "P{{severity.extract(/Sev([1-5])/)}}"
     message       = "🚨 Azure Budget Alert 🚨"
@@ -25,6 +25,11 @@ resource "opsgenie_integration_action" "azure_monitor_template" {
         operation      = "equals"
         expected_value = "CostAlerts"
       }
+      conditions {
+        field          = "monitorCondition"
+        operation      = "equals"
+        expected_value = "Fired"
+      }      
     }
 
     description   = chomp(<<-EOT
@@ -56,8 +61,8 @@ resource "opsgenie_integration_action" "azure_monitor_template" {
   create {
     name = "Create Alert - AMCAS Service Health"
     tags = ["azure", "servicehealth"]
+    alias         = "{{id}}"    
     user = "Azure"
-    alias         = "{{id}}"
     source        = "Azure"
     custom_priority      = "P{{severity.extract(/Sev([1-5])/)}}"
     message       = "🚨 Azure Service Health Alert: [ {{_payload.data.essentials.alertRule}} ] 🚨"
@@ -78,7 +83,12 @@ resource "opsgenie_integration_action" "azure_monitor_template" {
         field          = "monitoringService"
         operation      = "equals"
         expected_value = "ServiceHealth"
-      }      
+      }   
+      conditions {
+        field          = "monitorCondition"
+        operation      = "equals"
+        expected_value = "Fired"
+      }          
     }
 
     description   = chomp(<<-EOT
@@ -141,8 +151,8 @@ resource "opsgenie_integration_action" "azure_monitor_template" {
   create {
     name = "Create Alert - AMCAS Resource Health"
     tags = ["azure", "resourcehealth"]
-    user = "Azure"
     alias         = "{{id}}"
+    user = "Azure"
     source        = "Azure"
     custom_priority      = "P{{severity.extract(/Sev([1-5])/)}}"
     message       = "🚨 Azure Resource Health Alert: [ {{_payload.data.essentials.alertRule}} ] 🚨"
@@ -164,6 +174,11 @@ resource "opsgenie_integration_action" "azure_monitor_template" {
         operation      = "equals"
         expected_value = "Resource Health"
       }   
+      conditions {
+        field          = "monitorCondition"
+        operation      = "equals"
+        expected_value = "Fired"
+      }       
     }
 
     description   = chomp(<<-EOT
@@ -216,8 +231,8 @@ resource "opsgenie_integration_action" "azure_monitor_template" {
   create {
     name = "Create Alert - AMCAS ActivityLog"
     tags = ["azure", "activitylog"]
-    user = "Azure"
     alias         = "{{id}}"
+    user = "Azure"
     source        = "Azure"
     custom_priority      = "P{{severity.extract(/Sev([1-5])/)}}"
     message       = "🚨 Azure Activity Alert: [ {{_payload.data.essentials.alertRule}} ] 🚨"
@@ -233,7 +248,12 @@ resource "opsgenie_integration_action" "azure_monitor_template" {
         field          = "signalType"
         operation      = "equals"
         expected_value = "Activity Log"
-      }              
+      }      
+      conditions {
+        field          = "monitorCondition"
+        operation      = "equals"
+        expected_value = "Fired"
+      }               
     }
 
     description   = chomp(<<-EOT
@@ -284,8 +304,8 @@ resource "opsgenie_integration_action" "azure_monitor_template" {
   create {
     name = "Create Alert - AMCAS Metric"
     tags = ["azure", "metric"]
-    user = "Azure"
     alias         = "{{id}}"
+    user = "Azure"
     source        = "Azure"
     custom_priority      = "P{{severity.extract(/Sev([1-5])/)}}"
     message       = "🚨 Azure Metric Alert: [ {{_payload.data.essentials.alertRule}} ] 🚨"
@@ -302,6 +322,11 @@ resource "opsgenie_integration_action" "azure_monitor_template" {
         operation      = "equals"
         expected_value = "Metric"
       }
+      conditions {
+        field          = "monitorCondition"
+        operation      = "equals"
+        expected_value = "Fired"
+      }       
 
     }
 
@@ -369,7 +394,12 @@ resource "opsgenie_integration_action" "azure_monitor_template" {
         field          = "monitoringService"
         operation      = "equals"
         expected_value = "Log Alerts v2"
-      }      
+      }    
+      conditions {
+        field          = "monitorCondition"
+        operation      = "equals"
+        expected_value = "Fired"
+      }         
     }
 
     description   = chomp(<<-EOT
@@ -410,8 +440,8 @@ resource "opsgenie_integration_action" "azure_monitor_template" {
   create {
     name = "Create Alert - AMCAS LogV1"
     tags = ["azure", "logv1"]
+    alias         = "{{id}}"    
     user = "Azure"
-    alias         = "{{id}}"
     source        = "Azure"
     custom_priority      = "P{{severity.extract(/Sev([1-5])/)}}"
     message       = "🚨 Azure Log Alert: [ {{_payload.data.essentials.alertRule}} ] 🚨"
@@ -433,6 +463,11 @@ resource "opsgenie_integration_action" "azure_monitor_template" {
         operation      = "equals"
         expected_value = "Log Analytics"
       }    
+      conditions {
+        field          = "monitorCondition"
+        operation      = "equals"
+        expected_value = "Fired"
+      }       
     }
 
     description   = chomp(<<-EOT
@@ -486,8 +521,8 @@ resource "opsgenie_integration_action" "azure_monitor_template" {
   create {
     name = "Create Alert - AMCAS"
     tags = ["azure", "amcas"]
+    alias         = "{{id}}"    
     user = "Azure"
-    alias         = "{{id}}"
     source        = "Azure"
     custom_priority      = "P{{severity.extract(/Sev([1-5])/)}}"
     message       = "🚨 Azure Alert: [ {{_payload.essentials.alertRule}} ] 🚨"
@@ -499,6 +534,11 @@ resource "opsgenie_integration_action" "azure_monitor_template" {
         operation      = "equals"
         expected_value = "azureMonitorCommonAlertSchema"
       }
+      conditions {
+        field          = "monitorCondition"
+        operation      = "equals"
+        expected_value = "Fired"
+      }       
     }
 
     description   = chomp(<<-EOT
@@ -541,19 +581,24 @@ resource "opsgenie_integration_action" "azure_monitor_template" {
   create {
     name = "Create Alert - Catch All"
     tags = ["azure", "catchall"]
+    alias         = "{{id}}"    
     user = "Azure"
-    alias         = "{{id}}"
     source        = "Azure"
     custom_priority      = "P{{severity.extract(/Sev([1-5])/)}}"
     message       = "[Azure] {{name}} - {{resource_group_name}} -  {{schemaId}}"
     
     filter {
-      type = "match-all"
+      type = "match-any-condition"
+      conditions {
+        field          = "monitorCondition"
+        operation      = "equals"
+        expected_value = "Fired"
+      }
     }
-
+  
     description   = chomp(<<-EOT
           Link: {{portal_link}}
-
+  
           Status: {{status}}
           Severity: {{severity}}
           Name: {{name}}
@@ -574,7 +619,7 @@ resource "opsgenie_integration_action" "azure_monitor_template" {
           Condition Operator: {{condition_operator}} 
           Condition: 
           {{condition_metric_value}} {{condition_metric_unit}} {{condition_operator}} {{condition_threshold}} {{condition_metric_unit}} 
-
+  
           Subscription: {{subscription_id}}
           Resource Group: {{resource_group_name}}
           Region: {{resource_region}}
@@ -584,7 +629,7 @@ resource "opsgenie_integration_action" "azure_monitor_template" {
           Target: {{alertTargetIDs}}
           Dimensions: {{dimensions}}
           Dimensions List:  {{dimensionList}}
-
+  
           Alert Context Version: {{alertContextVersion}}
           Version: {{version}}
           Essentials Version: {{essentialsVersion}}
@@ -592,21 +637,21 @@ resource "opsgenie_integration_action" "azure_monitor_template" {
           Signal Type: {{signalType}}
           Alert Target ID: {{alertTargetIDs}}
           Origin Alert ID: {{originAlertId}}
-
+  
           Properties: {{properties}}
-
-
+  
+  
           Description: 
           {{description}}
-
+  
           ----
           SERVICE HEALTH-BASED ALERTS
           Health Status: {{_payload.data.context.activityLog.properties.currentHealthStatus}}
           Previous Health Status: {{_payload.data.activityLog.context.properties.previousHealthStatus}}
           Type: {{_payload.data.context.activityLog.properties.type}}
           Cause: {{_payload.data.context.activityLog.properties.cause}}
-
-
+  
+  
           ---
           FULL PAYLOAD:
           {{_payload}}
@@ -617,13 +662,9 @@ resource "opsgenie_integration_action" "azure_monitor_template" {
   # Close Notifications
   close {
     name = "Close"
+    alias = "{{id}}"    
     filter {
       type = "match-any-condition"
-      conditions {
-        field          = "status"
-        operation      = "equals"
-        expected_value = "Resolved"
-      }
       conditions {
         field          = "monitorCondition"
         operation      = "equals"
